@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             x:Class="CarCustomChecker.Views.VimsControl"
+             Title="Отслеживание">
+	<ContentPage.BindingContext>
+		<viewModels:VimsControlViewModel/>
+	</ContentPage.BindingContext>
+	<VerticalStackLayout Spacing="10" Margin="10">
+        <Grid ColumnDefinitions="*,auto">
+            <Entry Placeholder="Введите полный VIN" Text="{Binding VinToAdd, Mode=TwoWay}" HorizontalOptions="Fill"/>
+            <ImageButton Grid.Column="1" Command="{Binding AddVinCommand}" CommandParameter="{Binding VinToAdd}" 
+                         Source="add.png" WidthRequest="30" HeightRequest="30" CornerRadius="5" HorizontalOptions="End"/>
+		</Grid>
+
+
+		<Button Text="Поиск" Command="{Binding UpdateInfoCommand}"/>
+
+	    <Grid ColumnDefinitions="*, 50, 80, 70, 30" BackgroundColor="{StaticResource Primary}" HorizontalOptions="Fill" ColumnSpacing="5">
+		    <Label Grid.Column="0" Text="VIN" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" Margin="10,0"/>
+			<Label Grid.Column="1" Text="ПТО" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+			<Label Grid.Column="2" Text="Дата въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+			<Label Grid.Column="3" Text="Время въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+	    </Grid>
+	    <CollectionView ItemsSource="{Binding CarItems}" VerticalOptions="Fill">
+		    <CollectionView.ItemsLayout>
+			    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+		    </CollectionView.ItemsLayout>
+		    <CollectionView.ItemTemplate>
+			    <DataTemplate>
+					<Grid ColumnDefinitions="*,50, 80, 70, 30" ColumnSpacing="5">
+					    <Label Grid.Column="0" Text="{Binding Vin.Value}"/>
+						<Label Grid.Column="1" Text="{Binding PtoCode.Value}" HorizontalTextAlignment="Center"/>
+						<Label Grid.Column="2" Text="{Binding DateIn.Value}" HorizontalTextAlignment="Center"/>
+						<Label Grid.Column="3" Text="{Binding TimeIn.Value}" HorizontalTextAlignment="Center"/>
+						<ImageButton Grid.Column="4" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:VimsControlViewModel}}, Path=DeleteVinCommand}"
+						             CommandParameter="{Binding Vin.Value}" Source="delete.png" WidthRequest="30" HeightRequest="30" CornerRadius="5"/>
+				    </Grid>
+			    </DataTemplate>
+		    </CollectionView.ItemTemplate>
+	    </CollectionView>
+	</VerticalStackLayout>
+</ContentPage>
