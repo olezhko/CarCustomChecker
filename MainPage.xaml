@@ -22,7 +22,7 @@
 		                <!--RemainingItemsThresholdReachedCommand="{Binding LoadNewItemsCommand}" RemainingItemsThreshold="20"-->
 			<CollectionView.EmptyView>
 				<Grid RowDefinitions="*,auto,auto,*">
-					<Image Grid.Row="1" BackgroundColor="Transparent" Source="no_cars" VerticalOptions="Center"/>
+					<Image Grid.Row="1" BackgroundColor="Transparent" Source="no_cars" VerticalOptions="Start" HeightRequest="200" WidthRequest="200"/>
 					<Label Grid.Row="2" FontSize="Large" HorizontalTextAlignment="Center" Text="Нет машин по данному фильтру" VerticalOptions="Center" />
 				</Grid>
 			</CollectionView.EmptyView>
