@@ -11,14 +11,14 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>CarCustomChecker</ApplicationTitle>
+		<ApplicationTitle>Vim-проверка БЕЛТАМОЖСЕРВИС</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.LATec.carcustomchecker</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+		<ApplicationVersion>2</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -53,6 +53,9 @@
 	  <None Remove="Resources\Images\car.svg" />
 	  <None Remove="Resources\Images\no_cars.svg" />
 	  <None Remove="Resources\Images\search.svg" />
+	  <None Remove=".gitignore" />
+	  <None Remove=".gitattributes" />
+	  <None Remove="README.md" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,5 +71,4 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-
 </Project>
