@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Plugin.AdMob;
 
 namespace CarCustomChecker
 {
@@ -6,10 +7,11 @@ namespace CarCustomChecker
 	{
 		public static MauiApp CreateMauiApp()
 		{
-			var builder = MauiApp.CreateBuilder();
+            var builder = MauiApp.CreateBuilder();
 			builder
 				.UseMauiApp<App>()
-				.ConfigureFonts(fonts =>
+                .UseAdMob()
+                .ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -19,7 +21,7 @@ namespace CarCustomChecker
 			builder.Logging.AddDebug();
 #endif
 
-			return builder.Build();
+            return builder.Build();
 		}
 	}
 }

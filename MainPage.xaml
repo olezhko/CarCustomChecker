@@ -2,45 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="using:CarCustomChecker.ViewModels"
+             xmlns:admob="clr-namespace:Plugin.AdMob;assembly=Plugin.AdMob"
              x:Class="CarCustomChecker.MainPage"
              Title="БЕЛТАМОЖСЕРВИС">
 	<ContentPage.BindingContext>
 		<viewModels:MainPageViewModel/>
 	</ContentPage.BindingContext>
-	<VerticalStackLayout Padding="10,0" Spacing="5">
-		<Entry Placeholder="VIN (от 4 символов)" Text="{Binding VinSearch}" TextChanged="InputView_OnTextChanged"/>
-		<Picker ItemsSource="{Binding PtoCollection}" ItemDisplayBinding="{Binding Name}" SelectedIndex="0" SelectedIndexChanged="Picker_OnSelectedIndexChanged"
+    <Grid RowDefinitions="*,auto">
+        <VerticalStackLayout Padding="10,0" Spacing="5">
+            <Entry Placeholder="VIN (от 4 символов)" Text="{Binding VinSearch}" TextChanged="InputView_OnTextChanged"/>
+            <Picker ItemsSource="{Binding PtoCollection}" ItemDisplayBinding="{Binding Name}" SelectedIndex="0" SelectedIndexChanged="Picker_OnSelectedIndexChanged"
 		        SelectedItem="{Binding SelectedPto}"/>
 
-		<Grid ColumnDefinitions="3*,*, 1.4*, *" BackgroundColor="{StaticResource Primary}" HorizontalOptions="Fill" ColumnSpacing="5">
-			<Label Grid.Column="0" Text="VIN" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" Margin="10,0"/>
-			<Label Grid.Column="1" Text="ПТО" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
-			<Label Grid.Column="2" Text="Дата въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
-			<Label Grid.Column="3" Text="Время въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" />
-		</Grid>
-		<CollectionView ItemsSource="{Binding CarItems}" VerticalOptions="Fill">
-		                <!--RemainingItemsThresholdReachedCommand="{Binding LoadNewItemsCommand}" RemainingItemsThreshold="20"-->
-			<CollectionView.EmptyView>
-				<Grid RowDefinitions="*,auto,auto,*">
-					<Image Grid.Row="1" BackgroundColor="Transparent" Source="no_cars" VerticalOptions="Start" HeightRequest="200" WidthRequest="200"/>
-					<Label Grid.Row="2" FontSize="Large" HorizontalTextAlignment="Center" Text="Нет машин по данному фильтру" VerticalOptions="Center" />
-				</Grid>
-			</CollectionView.EmptyView>
-			<CollectionView.ItemsLayout>
-				<LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
-			</CollectionView.ItemsLayout>
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="3*,*, 1.4*, *" ColumnSpacing="5">
-						<Label Grid.Column="0" Text="{Binding Vin}" />
-						<Label Grid.Column="1" Text="{Binding PtoCode}" />
-						<Label Grid.Column="2" Text="{Binding DateIn}" />
-						<Label Grid.Column="3" Text="{Binding TimeIn}" />
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
+            <Grid ColumnDefinitions="3*,*, 1.4*, *" BackgroundColor="{StaticResource Primary}" HorizontalOptions="Fill" ColumnSpacing="5">
+                <Label Grid.Column="0" Text="VIN" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" Margin="10,0"/>
+                <Label Grid.Column="1" Text="ПТО" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+                <Label Grid.Column="2" Text="Дата въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+                <Label Grid.Column="3" Text="Время въезда" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" />
+            </Grid>
+            <CollectionView ItemsSource="{Binding CarItems}" VerticalOptions="Fill">
+                <CollectionView.EmptyView>
+                    <Grid RowDefinitions="*,auto,auto,*">
+                        <Image Grid.Row="1" BackgroundColor="Transparent" Source="no_cars" VerticalOptions="Start" HeightRequest="200" WidthRequest="200"/>
+                        <Label Grid.Row="2" FontSize="Large" HorizontalTextAlignment="Center" Text="Нет машин по данному фильтру" VerticalOptions="Center" />
+                    </Grid>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="3*,*, 1.4*, *" ColumnSpacing="5">
+                            <Label Grid.Column="0" Text="{Binding Vin}" />
+                            <Label Grid.Column="1" Text="{Binding PtoCode}" />
+                            <Label Grid.Column="2" Text="{Binding DateIn}" />
+                            <Label Grid.Column="3" Text="{Binding TimeIn}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-		<Label Text="{Binding TotalItems,StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10" VerticalOptions="End"/>
-	</VerticalStackLayout>
+            <Label Text="{Binding TotalItems,StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10" VerticalOptions="End"/>
+        </VerticalStackLayout>
+
+        <admob:BannerAd x:Name="AdMob" Grid.Row="1" VerticalOptions="End"/>
+    </Grid>
 </ContentPage>

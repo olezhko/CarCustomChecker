@@ -1,4 +1,5 @@
-﻿using CarCustomChecker.ViewModels;
+﻿using CarCustomChecker.Models;
+using CarCustomChecker.ViewModels;
 
 namespace CarCustomChecker;
 public partial class MainPage : ContentPage
@@ -8,6 +9,8 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		viewModel = BindingContext as MainPageViewModel;
+
+		AdMob.AdUnitId = DeviceInfo.Platform == DevicePlatform.Android? Constants.SearchAdsAndroid: Constants.SearchAdsiOS;
 	}
 
 	protected override async void OnAppearing()
