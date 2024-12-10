@@ -28,21 +28,21 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>CarVimChecker_ios_dev</CodesignProvision>
 	  <CodesignKey>iPhone Developer</CodesignKey>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <ApplicationVersion>3</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -76,7 +76,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.AdMob" Version="1.0.3-beta.2311172119" />
-		<PackageReference Include="RestSharp" Version="110.2.0" />
+		<PackageReference Include="RestSharp" Version="112.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
