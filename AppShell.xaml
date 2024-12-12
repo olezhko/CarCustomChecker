@@ -17,7 +17,11 @@
 			Title="Отслеживание" Icon="car.png"
 			ContentTemplate="{DataTemplate views:VimsControl}"
 			Route="MainPage" />
-	</TabBar>
+        <ShellContent
+			Title="ЭО" Icon="queue.png"
+			ContentTemplate="{DataTemplate views:ElectronicQueue}"
+			Route="MainPage" />
+    </TabBar>
 
 
 </Shell>

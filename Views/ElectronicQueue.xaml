@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             xmlns:admob="clr-namespace:Plugin.AdMob;assembly=Plugin.AdMob"
+             x:Class="CarCustomChecker.Views.ElectronicQueue"
+             Title="Электронная очередь в зонах ожидания">
+    <ContentPage.BindingContext>
+        <viewModels:ElectronicQueueViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,*,auto">
+        <Grid ColumnDefinitions="90, *, *, *, *, *, *" BackgroundColor="{StaticResource Primary}" HorizontalOptions="Fill" ColumnSpacing="5" Margin="10,0"
+              HeightRequest="40">
+            <Label Grid.Column="0" VerticalOptions="Center" Text="Название" FontAttributes="Bold" FontSize="12" />
+            <Image Grid.Column="1" VerticalOptions="Center" Source="car2.png" HeightRequest="30" WidthRequest="30"/>
+            <Image Grid.Column="2" VerticalOptions="Center" Source="truck.png" HeightRequest="30" WidthRequest="30" />
+            <Image Grid.Column="3" VerticalOptions="Center" Source="bus.png" HeightRequest="30" WidthRequest="30" />
+            <Image Grid.Column="4" VerticalOptions="Center" Source="moto.png" HeightRequest="30" WidthRequest="30" />
+            <Label Grid.Column="5" Text="Всего ТС в ЗО" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Label Grid.Column="6" Text="Приоритеты" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+        </Grid>
+        <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}" RefreshColor="Gray" VerticalOptions="StartAndExpand" Margin="10,0">
+            <CollectionView ItemsSource="{Binding Items}" VerticalOptions="Fill">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="90, *, *, *, *, *, *" ColumnSpacing="5">
+                            <Label Grid.Column="0" Text="{Binding Name}"/>
+                            <Label Grid.Column="1" Text="{Binding CountCar}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="2" Text="{Binding CountTruck}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="3" Text="{Binding CountBus}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="4" Text="{Binding CountMotorcycle}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="5" Text="{Binding CountAll}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="6" Text="{Binding CountPriority}" HorizontalTextAlignment="Center"/>
+                            <BoxView Color="Gray" VerticalOptions="End" HeightRequest="1" Grid.ColumnSpan="7"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <admob:BannerAd x:Name="AdMob" Grid.Row="2" VerticalOptions="End"/>
+    </Grid>
+</ContentPage>

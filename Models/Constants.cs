@@ -8,7 +8,9 @@ internal static class Constants
 
 	public static string SearchAdsAndroid = "ca-app-pub-8728883017081055/5119692634";
 	public static string ControlAdsAndroid = "ca-app-pub-8728883017081055/5664302323";
+	public static string ElectronicQueueAdsAndroid = "ca-app-pub-8728883017081055/1686721452";
 
     public static string SearchAdsiOS = "ca-app-pub-8728883017081055/6935061513";
     public static string ControlAdsiOS = "ca-app-pub-8728883017081055/5563954305";
+    public static string ElectronicQueueAdsiOS = "ca-app-pub-8728883017081055/9323064126";
 }

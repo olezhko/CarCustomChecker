@@ -1,6 +1,7 @@
 ﻿using CarCustomChecker.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System;
 using System.Net;
 
 namespace CarCustomChecker.Services;
@@ -12,7 +13,6 @@ internal class DataService : IDataService
 		var options = new RestClientOptions(serviceUrl + url)
 		{
 			ThrowOnAnyError = true,
-			MaxTimeout = -1,
 		};
 
 		var client = new RestClient(options);
@@ -62,4 +62,32 @@ internal class DataService : IDataService
 
 		return null;
 	}
+
+    public async Task<ElectronicQueueResult> GetElectronicQueueResult()
+    {
+        var request = InitRequest(Method.Get);
+
+        try
+        {
+            var options = new RestClientOptions("https://belarusborder.by/info/checkpoint?token=bts47d5f-6420-4f74-8f78-42e8e4370cc4")
+            {
+                ThrowOnAnyError = true,
+            };
+
+            var client = new RestClient(options);
+            var response = await client.ExecuteAsync(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var result = JsonConvert.DeserializeObject<ElectronicQueueResult>(response.Content);
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        return null;
+    }
 }
