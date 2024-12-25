@@ -17,8 +17,8 @@
 		<ApplicationId>com.LATec.carcustomchecker</ApplicationId>
 
 		<!-- Versions -->
-    <ApplicationVersion>6</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0.5</ApplicationDisplayVersion>
+    	<ApplicationVersion>7</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -28,23 +28,23 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>CarVimChecker_dev</CodesignProvision>
 	  <CodesignKey>iPhone Developer</CodesignKey>
-	  <ApplicationVersion>6</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.5</ApplicationDisplayVersion>
+	  <ApplicationVersion>7</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <ApplicationVersion>6</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.5</ApplicationDisplayVersion>
+	  <ApplicationVersion>7</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
 	  <CodesignProvision>CarVimChecker_ios_store</CodesignProvision>
 	  <CodesignKey>Apple Distribution: Oleg Ladyka (36WMJT4QLC)</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationVersion>6</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.5</ApplicationDisplayVersion>
+	  <ApplicationVersion>7</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <ApplicationVersion>6</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.5</ApplicationDisplayVersion>
+	  <ApplicationVersion>7</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->

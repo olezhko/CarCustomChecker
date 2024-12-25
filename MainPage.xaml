@@ -9,7 +9,7 @@
 		<viewModels:MainPageViewModel/>
 	</ContentPage.BindingContext>
     <Grid RowDefinitions="*,auto">
-        <VerticalStackLayout Padding="10,0" Spacing="5">
+        <VerticalStackLayout Padding="10,5" Spacing="5">
             <Entry Placeholder="VIN (от 4 символов)" Text="{Binding VinSearch}" TextChanged="InputView_OnTextChanged"/>
             <Picker ItemsSource="{Binding PtoCollection}" ItemDisplayBinding="{Binding Name}" SelectedIndex="0" SelectedIndexChanged="Picker_OnSelectedIndexChanged"
 		        SelectedItem="{Binding SelectedPto}"/>
@@ -22,9 +22,9 @@
             </Grid>
             <CollectionView ItemsSource="{Binding CarItems}" VerticalOptions="Fill">
                 <CollectionView.EmptyView>
-                    <Grid RowDefinitions="*,auto,auto,*">
-                        <Image Grid.Row="1" BackgroundColor="Transparent" Source="no_cars" VerticalOptions="Start" HeightRequest="200" WidthRequest="200"/>
-                        <Label Grid.Row="2" FontSize="Large" HorizontalTextAlignment="Center" Text="Нет машин по данному фильтру" VerticalOptions="Center" />
+                    <Grid RowDefinitions="auto,auto">
+                        <Image Grid.Row="0" BackgroundColor="Transparent" Source="no_cars" Margin="50"/>
+                        <Label Grid.Row="1" FontSize="Large" HorizontalTextAlignment="Center" Text="Нет машин по данному фильтру" VerticalOptions="Center" />
                     </Grid>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
