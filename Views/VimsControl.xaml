@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
@@ -9,8 +9,8 @@
 		<viewModels:VimsControlViewModel/>
 	</ContentPage.BindingContext>
     <Grid RowDefinitions="*,auto">
-        <VerticalStackLayout Spacing="10" Margin="10">
-            <Grid ColumnDefinitions="*,auto">
+        <VerticalStackLayout Spacing="10" Margin="10,5">
+            <Grid ColumnDefinitions="*,auto" ColumnSpacing="5">
                 <Entry Placeholder="Введите полный VIN" Text="{Binding VinToAdd, Mode=TwoWay}" HorizontalOptions="Fill"/>
                 <ImageButton Grid.Column="1" Command="{Binding AddVinCommand}" CommandParameter="{Binding VinToAdd}" 
                          Source="add.png" WidthRequest="30" HeightRequest="30" CornerRadius="5" HorizontalOptions="End"/>
