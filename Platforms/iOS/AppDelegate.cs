@@ -9,8 +9,6 @@ namespace CarCustomChecker
         {
             var app = MauiProgram.CreateMauiApp();
 
-            Google.MobileAds.MobileAds.SharedInstance.Start(completionHandler: null);
-
             return app;
         }
     }

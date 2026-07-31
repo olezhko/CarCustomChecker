@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="using:CarCustomChecker.ViewModels"
-             xmlns:admob="clr-namespace:Plugin.AdMob;assembly=Plugin.AdMob"
+             xmlns:yandexAds="clr-namespace:MAUI.Yandex.Ads;assembly=MAUI.Yandex.Ads"
              x:Class="CarCustomChecker.MainPage"
              Title="БЕЛТАМОЖСЕРВИС">
 	<ContentPage.BindingContext>
 		<viewModels:MainPageViewModel/>
 	</ContentPage.BindingContext>
-    <Grid RowDefinitions="*,auto">
+    <Grid RowDefinitions="*,50">
         <VerticalStackLayout Padding="10,5" Spacing="5">
             <Entry Placeholder="VIN (от 4 символов)" Text="{Binding VinSearch}" TextChanged="InputView_OnTextChanged"/>
             <Picker ItemsSource="{Binding PtoCollection}" ItemDisplayBinding="{Binding Name}" SelectedIndex="0" SelectedIndexChanged="Picker_OnSelectedIndexChanged"
@@ -45,6 +45,9 @@
             <Label Text="{Binding TotalItems,StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10" VerticalOptions="End"/>
         </VerticalStackLayout>
 
-        <admob:BannerAd x:Name="AdMob" Grid.Row="1" VerticalOptions="End"/>
+        <yandexAds:AdBannerView x:Name="AdMob" 
+            AdWidth="320" 
+            HeightRequest="50" Grid.Row="1"
+            HorizontalOptions="Center" />
     </Grid>
 </ContentPage>

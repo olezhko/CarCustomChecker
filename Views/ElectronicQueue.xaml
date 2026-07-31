@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
-             xmlns:admob="clr-namespace:Plugin.AdMob;assembly=Plugin.AdMob"
+             xmlns:yandexAds="clr-namespace:MAUI.Yandex.Ads;assembly=MAUI.Yandex.Ads"
              x:Class="CarCustomChecker.Views.ElectronicQueue"
              Title="Электронная очередь в зонах ожидания">
     <ContentPage.BindingContext>
         <viewModels:ElectronicQueueViewModel />
     </ContentPage.BindingContext>
-    <Grid RowDefinitions="auto,*,auto">
+    <Grid RowDefinitions="auto,*,50">
         <Grid ColumnDefinitions="90, *, *, *, *, *, *" BackgroundColor="{StaticResource Primary}" HorizontalOptions="Fill" ColumnSpacing="5" Margin="10,5"
               HeightRequest="40">
             <Label Grid.Column="0" VerticalOptions="Center" Text="Название" FontAttributes="Bold" FontSize="12" />
@@ -41,6 +41,9 @@
             </CollectionView>
         </RefreshView>
 
-        <admob:BannerAd x:Name="AdMob" Grid.Row="2" VerticalOptions="End"/>
+        <yandexAds:AdBannerView x:Name="AdMob" AdUnitId="R-M-19140808-4"
+            AdWidth="320" 
+            HeightRequest="50" Grid.Row="2"
+            HorizontalOptions="Center" />
     </Grid>
 </ContentPage>

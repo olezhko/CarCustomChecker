@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Gms.Ads;
 using Android.OS;
 
 namespace CarCustomChecker
@@ -11,12 +10,6 @@ namespace CarCustomChecker
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-#if DEBUG
-            var configBuilder = new RequestConfiguration.Builder();
-            configBuilder.SetTestDeviceIds(new List<string>() { "558BEEA7EC8B11BD288CD4BC81AACA59", "B3EEABB8EE11C2BE770B684D95219ECB" });
-            MobileAds.RequestConfiguration = configBuilder.Build();
-#endif
-
         }
     }
 }
