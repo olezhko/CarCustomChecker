@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Plugin.AdMob;
+﻿using MAUI.Yandex.Ads;
 
 namespace CarCustomChecker
 {
@@ -10,16 +9,12 @@ namespace CarCustomChecker
             var builder = MauiApp.CreateBuilder();
 			builder
 				.UseMauiApp<App>()
-                .UseAdMob()
+                .UseYandexAds()
                 .ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
-
-#if DEBUG
-			builder.Logging.AddDebug();
-#endif
 
             return builder.Build();
 		}

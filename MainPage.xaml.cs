@@ -10,7 +10,9 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		viewModel = BindingContext as MainPageViewModel;
 
-		AdMob.AdUnitId = DeviceInfo.Platform == DevicePlatform.Android? Constants.SearchAdsAndroid: Constants.SearchAdsiOS;
+		AdBanner.AdUnitId = DeviceInfo.Platform == DevicePlatform.Android? Constants.SearchAdsAndroid: Constants.SearchAdsiOS;
+		AdBanner.AdLoaded += (s, e) => Console.WriteLine($"[Ads] MainPage: ad loaded ({AdBanner.AdUnitId})");
+		AdBanner.AdFailedToLoad += (s, error) => Console.WriteLine($"[Ads] MainPage: ad failed to load ({AdBanner.AdUnitId}): {error}");
 	}
 
 	protected override async void OnAppearing()

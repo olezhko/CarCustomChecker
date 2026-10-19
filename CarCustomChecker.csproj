@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
+		<TargetFrameworks>net10.0-android;net10.0-ios</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CarCustomChecker</RootNamespace>
@@ -17,37 +17,37 @@
 		<ApplicationId>com.LATec.carcustomchecker</ApplicationId>
 
 		<!-- Versions -->
-    	<ApplicationVersion>7</ApplicationVersion>
-    	<ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
+    	<ApplicationVersion>10</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>CarVimChecker_dev</CodesignProvision>
 	  <CodesignKey>iPhone Developer</CodesignKey>
-	  <ApplicationVersion>8</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
+		<ApplicationVersion>10</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <ApplicationVersion>8</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
+		<ApplicationVersion>10</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
 	  <CodesignProvision>CarVimChecker_ios_store</CodesignProvision>
 	  <CodesignKey>Apple Distribution: Oleg Ladyka (36WMJT4QLC)</CodesignKey>
     <EnableSGenConc>True</EnableSGenConc>
     <UseInterpreter>True</UseInterpreter>
     <Registrar>static</Registrar>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-	  <ApplicationVersion>8</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
+	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <ApplicationVersion>8</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+	  <ApplicationVersion>10</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -76,11 +76,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.100" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.100" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
+		<PackageReference Include="LATec.MAUI.Yandex.Ads" Version="1.0.0-beta.3" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.110" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.110" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Plugin.AdMob" Version="1.0.3-beta.2311172119" />
 		<PackageReference Include="RestSharp" Version="112.1.0" />
 	</ItemGroup>
 

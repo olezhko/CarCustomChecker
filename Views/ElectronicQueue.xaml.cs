@@ -8,7 +8,9 @@ public partial class ElectronicQueue : ContentPage
 	public ElectronicQueue()
 	{
 		InitializeComponent();
-        AdMob.AdUnitId = DeviceInfo.Platform == DevicePlatform.Android ? Constants.ElectronicQueueAdsAndroid : Constants.ElectronicQueueAdsiOS;
+        AdBanner.AdUnitId = DeviceInfo.Platform == DevicePlatform.Android ? Constants.ElectronicQueueAdsAndroid : Constants.ElectronicQueueAdsiOS;
+        AdBanner.AdLoaded += (s, e) => Console.WriteLine($"[Ads] ElectronicQueue: ad loaded ({AdBanner.AdUnitId})");
+        AdBanner.AdFailedToLoad += (s, error) => Console.WriteLine($"[Ads] ElectronicQueue: ad failed to load ({AdBanner.AdUnitId}): {error}");
     }
 
     protected override async void OnAppearing()

@@ -10,7 +10,7 @@ internal static class Constants
 	public static string ControlAdsAndroid = "ca-app-pub-7256966686202731/8497801410";
 	public static string ElectronicQueueAdsAndroid = "ca-app-pub-7256966686202731/1030374931";
 
-    public static string SearchAdsiOS = "ca-app-pub-7256966686202731/9483849520";
-    public static string ControlAdsiOS = "ca-app-pub-7256966686202731/5959553397";
-    public static string ElectronicQueueAdsiOS = "ca-app-pub-7256966686202731/9595561988";
+    public static string SearchAdsiOS = "R-M-16407624-3";
+    public static string ControlAdsiOS = "R-M-16407624-2";
+    public static string ElectronicQueueAdsiOS = "R-M-16407624-1";
 }
