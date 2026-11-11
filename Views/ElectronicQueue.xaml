@@ -45,6 +45,7 @@
             </CollectionView>
         </RefreshView>
 
+        <ActivityIndicator Grid.Row="1" IsRunning="{Binding ShowLoadingIndicator}" IsVisible="{Binding ShowLoadingIndicator}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50"/>
         <yandex:AdBannerView x:Name="AdBanner" Grid.Row="2" AdWidth="320" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="End"/>
     </Grid>
 </ContentPage>

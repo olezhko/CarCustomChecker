@@ -9,7 +9,7 @@ public class BaseViewModel : INotifyPropertyChanged
 	public bool IsBusy
 	{
 		get => isBusy;
-		set => SetProperty(ref isBusy, value);
+		set => SetProperty(ref isBusy, value, onChanged: () => OnPropertyChanged(nameof(ShowLoadingIndicator)));
 	}
 
 	bool isRefreshing = false;
@@ -20,8 +20,13 @@ public class BaseViewModel : INotifyPropertyChanged
 	public bool IsRefreshing
 	{
 		get => isRefreshing;
-		set => SetProperty(ref isRefreshing, value);
+		set => SetProperty(ref isRefreshing, value, onChanged: () => OnPropertyChanged(nameof(ShowLoadingIndicator)));
 	}
+
+	/// <summary>
+	/// True while data is loading, except during pull-to-refresh where the RefreshView shows its own spinner.
+	/// </summary>
+	public bool ShowLoadingIndicator => IsBusy && !IsRefreshing;
 
 	protected bool SetProperty<T>(ref T backingStore, T value,
 		[CallerMemberName] string propertyName = "",

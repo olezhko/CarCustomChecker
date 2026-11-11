@@ -53,20 +53,35 @@ class VimsControlViewModel : BaseViewModel
 		SettingsService.Save(items);
 	}
 
-	private void UpdateInfo()
+	private async Task UpdateInfoAsync()
 	{
-		Parallel.ForEach(CarItems, async (item) =>
+		if (IsBusy)
 		{
-			var result = await dataService.GetCarItems(1, 1,string.Empty,item.Vin.Value);
-			if (result != null)
-			{
-				var car = result.Data.FirstOrDefault();
+			return;
+		}
 
-				item.DateIn.Value = car != null? car.DateIn: Constants.NotFound;
-				item.TimeIn.Value = car != null? car.TimeIn : Constants.NotFound;
-				item.PtoCode.Value = car != null? car.PtoCode : Constants.NotFound;
-			}
-		});
+		IsBusy = true;
+		try
+		{
+			await Task.WhenAll(CarItems.ToList().Select(UpdateItemAsync));
+		}
+		finally
+		{
+			IsBusy = false;
+		}
+	}
+
+	private async Task UpdateItemAsync(CarItemViewModel item)
+	{
+		var result = await dataService.GetCarItems(1, 1, string.Empty, item.Vin.Value);
+		if (result != null)
+		{
+			var car = result.Data?.FirstOrDefault();
+
+			item.DateIn.Value = car != null ? car.DateIn : Constants.NotFound;
+			item.TimeIn.Value = car != null ? car.TimeIn : Constants.NotFound;
+			item.PtoCode.Value = car != null ? car.PtoCode : Constants.NotFound;
+		}
 	}
 
 	#region Properties
@@ -78,7 +93,7 @@ class VimsControlViewModel : BaseViewModel
 	}
 
 	public ICommand AddVinCommand => new Command<string>(AddVin);
-	public ICommand UpdateInfoCommand => new Command(UpdateInfo);
+	public ICommand UpdateInfoCommand => new Command(async () => await UpdateInfoAsync());
 	public ICommand DeleteVinCommand => new Command<string>(DeleteVin);
 	public ObservableCollection<CarItemViewModel> CarItems { get; set; }
 	#endregion

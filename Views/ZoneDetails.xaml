@@ -44,6 +44,7 @@
             </CollectionView>
         </RefreshView>
 
+        <ActivityIndicator Grid.Row="3" IsRunning="{Binding ShowLoadingIndicator}" IsVisible="{Binding ShowLoadingIndicator}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50"/>
         <Label Grid.Row="4" Text="{Binding TotalItems, StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10"/>
     </Grid>
 </ContentPage>

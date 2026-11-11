@@ -36,7 +36,7 @@
         <RefreshView Grid.Row="3" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray">
             <CollectionView ItemsSource="{Binding Vehicles}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
                 <CollectionView.Footer>
-                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" HeightRequest="40" Margin="0,5"/>
+                    <ActivityIndicator IsRunning="{Binding ShowLoadingIndicator}" IsVisible="{Binding ShowLoadingIndicator}" Color="Gray" HeightRequest="40" Margin="0,5"/>
                 </CollectionView.Footer>
                 <CollectionView.EmptyView>
                     <Label Text="Записи не найдены" HorizontalTextAlignment="Center" Margin="0,40" FontSize="Medium"/>

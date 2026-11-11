@@ -45,6 +45,7 @@
             <Label Text="{Binding TotalItems,StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10" VerticalOptions="End"/>
         </VerticalStackLayout>
 
+        <ActivityIndicator Grid.Row="0" IsRunning="{Binding ShowLoadingIndicator}" IsVisible="{Binding ShowLoadingIndicator}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50"/>
         <yandex:AdBannerView x:Name="AdBanner" Grid.Row="1" AdWidth="320" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="End"/>
     </Grid>
 </ContentPage>
