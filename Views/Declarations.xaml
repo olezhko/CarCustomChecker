@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             xmlns:yandex="clr-namespace:MAUI.Yandex.Ads;assembly=MAUI.Yandex.Ads"
+             x:Class="CarCustomChecker.Views.Declarations"
+             Title="Декларации">
+    <ContentPage.BindingContext>
+        <viewModels:DeclarationsViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,auto,*,auto" Padding="10,5" RowSpacing="5">
+        <Picker Grid.Row="0" Title="ВПТО" ItemsSource="{Binding Places}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedPlace}"/>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,auto" ColumnSpacing="5">
+            <Entry Placeholder="Номер декларации, напр. 00000/ДДММГГ/0000000" Text="{Binding RegNumberToAdd, Mode=TwoWay}" ReturnCommand="{Binding AddCommand}"/>
+            <ImageButton Grid.Column="1" Command="{Binding AddCommand}" Source="add.png" WidthRequest="30" HeightRequest="30" CornerRadius="5"/>
+        </Grid>
+
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray">
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.EmptyView>
+                    <Label Text="Добавьте декларацию, чтобы отслеживать её статус" HorizontalTextAlignment="Center" Margin="20,40" FontSize="Medium"/>
+                </CollectionView.EmptyView>
+                <CollectionView.Footer>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" HeightRequest="40" Margin="0,5"/>
+                </CollectionView.Footer>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto,auto,auto,auto,auto,auto" RowSpacing="2" Padding="5,5">
+                            <Label Grid.Row="0" Text="{Binding RegNumber}" FontAttributes="Bold"/>
+                            <ImageButton Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="delete.png" WidthRequest="30" HeightRequest="30" CornerRadius="5" VerticalOptions="Start"
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:DeclarationsViewModel}}, Path=DeleteCommand}"
+                                         CommandParameter="{Binding .}"/>
+                            <Label Grid.Row="1" Text="{Binding PlaceName}" FontSize="12" TextColor="{StaticResource Gray500}"/>
+                            <HorizontalStackLayout Grid.Row="2" Spacing="5">
+                                <Ellipse Fill="{Binding StatusColor}" WidthRequest="10" HeightRequest="10" VerticalOptions="Center"
+                                         IsVisible="{Binding Result, Converter={StaticResource IsNotNullConverter}}"/>
+                                <Label Text="{Binding StatusText}" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Grid.Row="3" Text="{Binding Result.DeclMode, StringFormat='Вид: {0}'}" FontSize="12" IsVisible="{Binding Result, Converter={StaticResource IsNotNullConverter}}"/>
+                            <Label Grid.Row="4" Text="{Binding Result.RegDate, StringFormat='Дата регистрации: {0}'}" FontSize="12" IsVisible="{Binding Result, Converter={StaticResource IsNotNullConverter}}"/>
+                            <Label Grid.Row="5" Text="{Binding Result.AccNumber, StringFormat='Разрешение: {0}'}" FontSize="12" IsVisible="{Binding Result.AccNumber, Converter={StaticResource IsNotEmptyConverter}}"/>
+                            <Label Grid.Row="6" Text="{Binding Note}" FontSize="12" TextColor="{Binding StatusColor}" IsVisible="{Binding HasNote}"/>
+                            <BoxView Grid.Row="6" Grid.ColumnSpan="2" Color="Gray" HeightRequest="1" VerticalOptions="End" Margin="0,0,0,-5"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <yandex:AdBannerView x:Name="AdBanner" Grid.Row="3" AdWidth="320" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="End"/>
+    </Grid>
+</ContentPage>

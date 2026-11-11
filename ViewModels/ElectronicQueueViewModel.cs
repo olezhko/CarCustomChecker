@@ -12,11 +12,23 @@ public class ElectronicQueueViewModel : BaseViewModel
 	{
         Items = new ObservableCollection<ElectronicQueue>();
 		RefreshCommand = new Command(Refresh);
+		OpenZoneCommand = new Command<ElectronicQueue>(async zone => await OpenZoneAsync(zone));
     }
+
+	private static async Task OpenZoneAsync(ElectronicQueue zone)
+	{
+		if (string.IsNullOrEmpty(zone?.Id))
+		{
+			return;
+		}
+
+		await Shell.Current.GoToAsync($"{nameof(Views.ZoneDetails)}?id={Uri.EscapeDataString(zone.Id)}");
+	}
 
 	private async void Refresh()
 	{
 		await LoadDataAsync();
+		IsRefreshing = false;
 	}
 
 	public async Task LoadDataAsync()
@@ -40,5 +52,7 @@ public class ElectronicQueueViewModel : BaseViewModel
 	public ObservableCollection<ElectronicQueue> Items { get; set; }
     
 	public ICommand RefreshCommand { get; set; }
+
+	public ICommand OpenZoneCommand { get; }
 	#endregion
 }

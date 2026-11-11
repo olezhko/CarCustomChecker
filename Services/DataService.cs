@@ -63,6 +63,84 @@ internal class DataService : IDataService
 		return null;
 	}
 
+	public Task<IReadOnlyList<CustomsOffice>> GetCustomsOffices(int placeKind)
+	{
+		var body = JsonConvert.SerializeObject(new { place_kind = placeKind });
+		return ExecuteAsync<IReadOnlyList<CustomsOffice>>("/customs-place", InitRequest(Method.Post, body));
+	}
+
+	public Task<CustomsPlace> GetCustomsPlace(int id) =>
+		ExecuteAsync<CustomsPlace>($"/customs-place/{id}", InitRequest(Method.Get));
+
+	public Task<PagedResult<VptoDeclaration>> SearchVpto(int placeId, string regNumber, int page)
+	{
+		var body = JsonConvert.SerializeObject(new
+		{
+			place_id = placeId,
+			declStatus = string.Empty,
+			docTypes = Array.Empty<string>(),
+			regNumber,
+			page
+		});
+		return ExecuteAsync<PagedResult<VptoDeclaration>>("/vpto", InitRequest(Method.Post, body));
+	}
+
+	public Task<PagedResult<SvhEntry>> SearchSvh(int placeId, string regNum, string transport, string numItem, int page)
+	{
+		var body = JsonConvert.SerializeObject(new
+		{
+			place_id = placeId,
+			numItem,
+			dateIn = string.Empty,
+			transport,
+			regNum,
+			page
+		});
+		return ExecuteAsync<PagedResult<SvhEntry>>("/svh", InitRequest(Method.Post, body));
+	}
+
+	public Task<IReadOnlyList<RptoOffice>> GetRptoOffices() =>
+		ExecuteAsync<IReadOnlyList<RptoOffice>>("/rpto", InitRequest(Method.Get));
+
+	public Task<RptoPlace> GetRptoPlace(int id) =>
+		ExecuteAsync<RptoPlace>($"/rpto/{id}", InitRequest(Method.Get));
+
+	public Task<PagedResult<RptoVehicle>> GetRptoVehicles(int id, string search, int page)
+	{
+		var body = JsonConvert.SerializeObject(new { id, search, page });
+		return ExecuteAsync<PagedResult<RptoVehicle>>("/rpto/vehicles", InitRequest(Method.Post, body));
+	}
+
+	// mon.declarant.by calls this endpoint with token=test; the token used for /info/checkpoint returns empty queues here.
+	public Task<ZoneMonitoring> GetZoneMonitoring(string checkpointId) =>
+		ExecuteAsync<ZoneMonitoring>(
+			new RestClient(new RestClientOptions($"https://belarusborder.by/info/monitoring-new?token=test&checkpointId={Uri.EscapeDataString(checkpointId)}")
+			{
+				ThrowOnAnyError = true,
+			}),
+			InitRequest(Method.Get));
+
+	private static Task<T> ExecuteAsync<T>(string url, RestRequest request) where T : class =>
+		ExecuteAsync<T>(InitClient(url), request);
+
+	private static async Task<T> ExecuteAsync<T>(RestClient client, RestRequest request) where T : class
+	{
+		try
+		{
+			var response = await client.ExecuteAsync(request);
+			if (response.StatusCode == HttpStatusCode.OK)
+			{
+				return JsonConvert.DeserializeObject<T>(response.Content);
+			}
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+		}
+
+		return null;
+	}
+
     public async Task<ElectronicQueueResult> GetElectronicQueueResult()
     {
         var request = InitRequest(Method.Get);

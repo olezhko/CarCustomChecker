@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="CarCustomChecker.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -13,14 +13,28 @@
 			Title="Поиск" Icon="search.png"
 			ContentTemplate="{DataTemplate local:MainPage}"
 			Route="MainPage" />
-		<ShellContent
-			Title="Отслеживание" Icon="car.png"
-			ContentTemplate="{DataTemplate views:VimsControl}"
-			Route="MainPage" />
+		<Tab Title="Трекинг" Icon="car.png">
+			<ShellContent
+				Title="VIN"
+				ContentTemplate="{DataTemplate views:VimsControl}"
+				Route="VimsControl" />
+			<ShellContent
+				Title="Декларации"
+				ContentTemplate="{DataTemplate views:Declarations}"
+				Route="Declarations" />
+		</Tab>
         <ShellContent
 			Title="ЭО" Icon="queue.png"
 			ContentTemplate="{DataTemplate views:ElectronicQueue}"
 			Route="MainPage" />
+        <ShellContent
+			Title="РПТО" Icon="customs.png"
+			ContentTemplate="{DataTemplate views:RptoList}"
+			Route="RptoList" />
+        <ShellContent
+			Title="СВХ" Icon="warehouse.png"
+			ContentTemplate="{DataTemplate views:SvhList}"
+			Route="SvhList" />
     </TabBar>
 
 

@@ -16,17 +16,21 @@
             <Image Grid.Column="2" VerticalOptions="Center" Source="truck.png" HeightRequest="30" WidthRequest="30" />
             <Image Grid.Column="3" VerticalOptions="Center" Source="bus.png" HeightRequest="30" WidthRequest="30" />
             <Image Grid.Column="4" VerticalOptions="Center" Source="moto.png" HeightRequest="30" WidthRequest="30" />
-            <Label Grid.Column="5" Text="Всего ТС в ЗО" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Label Grid.Column="5" Text="Всего ТС" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
             <Label Grid.Column="6" Text="Приоритеты" FontAttributes="Bold" FontSize="12" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
         </Grid>
-        <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}" RefreshColor="Gray" VerticalOptions="StartAndExpand" Margin="10,0">
+        <RefreshView Grid.Row="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray" VerticalOptions="StartAndExpand" Margin="10,0">
             <CollectionView ItemsSource="{Binding Items}" VerticalOptions="Fill">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnDefinitions="90, *, *, *, *, *, *" ColumnSpacing="5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ElectronicQueueViewModel}}, Path=OpenZoneCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
                             <Label Grid.Column="0" Text="{Binding Name}"/>
                             <Label Grid.Column="1" Text="{Binding CountCar}" HorizontalTextAlignment="Center"/>
                             <Label Grid.Column="2" Text="{Binding CountTruck}" HorizontalTextAlignment="Center"/>

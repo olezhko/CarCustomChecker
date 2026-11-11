@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             x:Class="CarCustomChecker.Views.SvhDetails"
+             Title="{Binding Place.Name}">
+    <ContentPage.BindingContext>
+        <viewModels:SvhDetailsViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,auto,*,auto" Padding="10,5" RowSpacing="5">
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="{Binding Place.Address}"/>
+            <Label Text="{Binding Place.WorkTime, StringFormat='Режим работы: {0}'}" FontSize="12"
+                   IsVisible="{Binding Place.WorkTime, Converter={StaticResource IsNotEmptyConverter}}"/>
+            <Label Text="{Binding Place.Phones, StringFormat='Телефоны: {0}'}" FontSize="12"
+                   IsVisible="{Binding Place.Phones, Converter={StaticResource IsNotEmptyConverter}}"/>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="auto,auto" ColumnSpacing="5">
+            <Entry Grid.Row="0" Grid.Column="0" Placeholder="Рег. номер СВХ" Text="{Binding RegNum}" ReturnCommand="{Binding SearchCommand}"/>
+            <Entry Grid.Row="0" Grid.Column="1" Placeholder="Номер ТС / прицепа" Text="{Binding Transport}" ReturnCommand="{Binding SearchCommand}"/>
+            <Entry Grid.Row="1" Grid.Column="0" Placeholder="Номер" Text="{Binding NumItem}" ReturnCommand="{Binding SearchCommand}"/>
+            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5" HorizontalOptions="End">
+                <Button Text="Поиск" Command="{Binding SearchCommand}"/>
+                <Button Text="Сброс" Command="{Binding ClearCommand}" BackgroundColor="{StaticResource Gray400}"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray">
+            <CollectionView ItemsSource="{Binding Entries}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                <CollectionView.EmptyView>
+                    <Label Text="Записи не найдены" HorizontalTextAlignment="Center" Margin="0,40" FontSize="Medium"/>
+                </CollectionView.EmptyView>
+                <CollectionView.Footer>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" HeightRequest="40" Margin="0,5"/>
+                </CollectionView.Footer>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto" RowSpacing="2" Padding="5,5">
+                            <Grid Grid.Row="0" ColumnDefinitions="*,auto">
+                                <Label Text="{Binding RegNum}" FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Text="{Binding NumItem, StringFormat='№ {0}'}" FontSize="12" TextColor="{StaticResource Gray500}"/>
+                            </Grid>
+                            <Label Grid.Row="1" Text="{Binding Transport}" FontSize="12"
+                                   IsVisible="{Binding Transport, Converter={StaticResource IsNotEmptyConverter}}"/>
+                            <Label Grid.Row="2" Text="{Binding DateIn, StringFormat='Въезд: {0}'}" FontSize="12"/>
+                            <Label Grid.Row="3" Text="{Binding DateOut, StringFormat='Выезд: {0}'}" FontSize="12" TextColor="Green"
+                                   IsVisible="{Binding DateOut, Converter={StaticResource IsNotEmptyConverter}}"/>
+                            <Label Grid.Row="4" Text="{Binding VhNum, StringFormat='Разрешение на процедуру ВХ: {0}'}" FontSize="12"
+                                   IsVisible="{Binding VhNum, Converter={StaticResource IsNotEmptyConverter}}"/>
+                            <Label Grid.Row="5" Text="{Binding DocumentsText}" FontSize="12" TextColor="{StaticResource Gray500}"
+                                   IsVisible="{Binding DocumentsText, Converter={StaticResource IsNotEmptyConverter}}"/>
+                            <BoxView Grid.Row="6" Color="Gray" HeightRequest="1" Margin="0,4,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Label Grid.Row="3" Text="{Binding TotalItems, StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10"/>
+    </Grid>
+</ContentPage>

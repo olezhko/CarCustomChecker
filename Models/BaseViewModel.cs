@@ -12,6 +12,17 @@ public class BaseViewModel : INotifyPropertyChanged
 		set => SetProperty(ref isBusy, value);
 	}
 
+	bool isRefreshing = false;
+	/// <summary>
+	/// Bind RefreshView.IsRefreshing here, not to IsBusy: setting IsRefreshing to true
+	/// runs the RefreshView's Command, so tying it to IsBusy re-triggers a reload on every load.
+	/// </summary>
+	public bool IsRefreshing
+	{
+		get => isRefreshing;
+		set => SetProperty(ref isRefreshing, value);
+	}
+
 	protected bool SetProperty<T>(ref T backingStore, T value,
 		[CallerMemberName] string propertyName = "",
 		Action onChanged = null)

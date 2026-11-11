@@ -6,11 +6,17 @@ internal static class Constants
 	public static string NoData = " ---- ";
 	public static string NotFound = "Нет данных";
 
-	public static string SearchAdsAndroid = "ca-app-pub-7256966686202731/8230208102";
-	public static string ControlAdsAndroid = "ca-app-pub-7256966686202731/8497801410";
-	public static string ElectronicQueueAdsAndroid = "ca-app-pub-7256966686202731/1030374931";
+	public static string SearchAdsAndroid = "R-M-19140808-1";
+	public static string ControlAdsAndroid = "R-M-19140808-2";
+	public static string ElectronicQueueAdsAndroid = "R-M-19140808-3";
+	public static string DeclarationsAdsAndroid = "R-M-19140808-4";
+	public static string RptoAdsAndroid = "R-M-19140808-5";
+	public static string SvhAdsAndroid = "R-M-19140808-6";
 
     public static string SearchAdsiOS = "R-M-16407624-3";
     public static string ControlAdsiOS = "R-M-16407624-2";
     public static string ElectronicQueueAdsiOS = "R-M-16407624-1";
+    public static string DeclarationsAdsiOS = "R-M-16407624-4";
+    public static string RptoAdsiOS = "R-M-16407624-5";
+    public static string SvhAdsiOS = "R-M-16407624-6";
 }

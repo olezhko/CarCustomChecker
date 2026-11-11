@@ -28,13 +28,13 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>CarVimChecker_dev</CodesignProvision>
 	  <CodesignKey>iPhone Developer</CodesignKey>
-		<ApplicationVersion>10</ApplicationVersion>
-    	<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
+		<ApplicationVersion>11</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.11</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-		<ApplicationVersion>10</ApplicationVersion>
-    	<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
+		<ApplicationVersion>11</ApplicationVersion>
+    	<ApplicationDisplayVersion>1.0.11</ApplicationDisplayVersion>
 	  <CodesignProvision>CarVimChecker_ios_store</CodesignProvision>
 	  <CodesignKey>Apple Distribution: Oleg Ladyka (36WMJT4QLC)</CodesignKey>
     <EnableSGenConc>True</EnableSGenConc>
@@ -42,12 +42,12 @@
     <Registrar>static</Registrar>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
-	  <ApplicationVersion>10</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
+	  <ApplicationVersion>11</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.11</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <ApplicationVersion>10</ApplicationVersion>
-	  <ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
+	  <ApplicationVersion>11</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.11</ApplicationDisplayVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -67,6 +67,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="api.mon.declarant.by — API Overview.pdf" />
+	  <None Remove="CLAUDE.md" />
 	  <None Remove="Resources\Images\car.svg" />
 	  <None Remove="Resources\Images\no_cars.svg" />
 	  <None Remove="Resources\Images\search.svg" />
@@ -76,11 +78,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="LATec.MAUI.Yandex.Ads" Version="1.0.0-beta.3" />
+		<PackageReference Include="LATec.MAUI.Yandex.Ads" Version="1.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.110" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.110" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="RestSharp" Version="112.1.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="RestSharp" Version="114.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

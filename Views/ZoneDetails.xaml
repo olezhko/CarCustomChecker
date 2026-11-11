@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             x:Class="CarCustomChecker.Views.ZoneDetails"
+             Title="{Binding Info.Name}">
+    <ContentPage.BindingContext>
+        <viewModels:ZoneDetailsViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,auto,auto,*,auto" Padding="10,5" RowSpacing="5">
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="{Binding Info.Address}"/>
+            <Label Text="{Binding Info.Phone, StringFormat='Телефоны: {0}'}" FontSize="12"/>
+        </VerticalStackLayout>
+
+        <Picker Grid.Row="1" ItemsSource="{Binding VehicleTypes}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedVehicleType}"/>
+
+        <SearchBar Grid.Row="2" Placeholder="Рег. номер" Text="{Binding Search}"/>
+
+        <RefreshView Grid.Row="3" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray">
+            <CollectionView ItemsSource="{Binding Vehicles}">
+                <CollectionView.EmptyView>
+                    <Label Text="Записи не найдены" HorizontalTextAlignment="Center" Margin="0,40" FontSize="Medium"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,*,auto" RowDefinitions="auto,auto,auto,auto" ColumnSpacing="5" RowSpacing="2" Padding="5,0">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding OrderId}" FontAttributes="Bold"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding RegNum}" FontAttributes="Bold"/>
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="5">
+                                <Ellipse Fill="{Binding StatusColor}" WidthRequest="10" HeightRequest="10" VerticalOptions="Center"/>
+                                <Label Text="{Binding StatusText}" FontSize="12" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding QueueTypeText}" FontSize="12" TextColor="{StaticResource Gray500}"/>
+                            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding RegistrationDate, StringFormat='Регистрация в ЗО: {0}'}" FontSize="12"/>
+                            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ChangedDate, StringFormat='Статус изменен: {0}'}" FontSize="12"/>
+                            <BoxView Grid.Row="3" Grid.ColumnSpan="3" Color="Gray" HeightRequest="1" VerticalOptions="End" Margin="0,0,0,-4"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Label Grid.Row="4" Text="{Binding TotalItems, StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10"/>
+    </Grid>
+</ContentPage>

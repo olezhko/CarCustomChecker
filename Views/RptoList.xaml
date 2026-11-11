@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             xmlns:yandex="clr-namespace:MAUI.Yandex.Ads;assembly=MAUI.Yandex.Ads"
+             x:Class="CarCustomChecker.Views.RptoList"
+             Title="Региональные ПТО">
+    <ContentPage.BindingContext>
+        <viewModels:RptoListViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*,auto">
+        <RefreshView Grid.Row="0" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray" Margin="10,5">
+            <CollectionView ItemsSource="{Binding Offices}" IsGrouped="True">
+                <CollectionView.EmptyView>
+                    <Label Text="Нет данных" HorizontalTextAlignment="Center" Margin="0,40" FontSize="Medium"/>
+                </CollectionView.EmptyView>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}" FontAttributes="Bold" BackgroundColor="{StaticResource Primary}" Padding="10,8" Margin="0,10,0,0"/>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="auto,auto,auto,auto" Padding="10,8" RowSpacing="2">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:RptoListViewModel}}, Path=OpenPlaceCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="{Binding Address}" FontSize="12"/>
+                            <Label Grid.Row="2" Text="{Binding TimeWork}" FontSize="12" TextColor="{StaticResource Gray500}"/>
+                            <BoxView Grid.Row="3" Color="Gray" HeightRequest="1" Margin="0,6,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <yandex:AdBannerView x:Name="AdBanner" Grid.Row="1" AdWidth="320" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="End"/>
+    </Grid>
+</ContentPage>

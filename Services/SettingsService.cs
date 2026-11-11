@@ -1,4 +1,7 @@
-﻿namespace CarCustomChecker.Services;
+﻿using CarCustomChecker.Models;
+using Newtonsoft.Json;
+
+namespace CarCustomChecker.Services;
 
 public class SettingsService
 {
@@ -18,5 +21,28 @@ public class SettingsService
 	{
 		var vimString = string.Join(',', array);
 		Vims = vimString;
+	}
+
+	private static string Declarations
+	{
+		get => Preferences.Get(nameof(Declarations), string.Empty);
+		set => Preferences.Set(nameof(Declarations), value);
+	}
+
+	public static List<TrackedDeclaration> LoadDeclarations()
+	{
+		try
+		{
+			return JsonConvert.DeserializeObject<List<TrackedDeclaration>>(Declarations) ?? [];
+		}
+		catch (JsonException)
+		{
+			return [];
+		}
+	}
+
+	public static void SaveDeclarations(IEnumerable<TrackedDeclaration> declarations)
+	{
+		Declarations = JsonConvert.SerializeObject(declarations);
 	}
 }

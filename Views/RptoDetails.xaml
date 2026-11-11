@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarCustomChecker.ViewModels"
+             x:Class="CarCustomChecker.Views.RptoDetails"
+             Title="{Binding Place.Name}">
+    <ContentPage.BindingContext>
+        <viewModels:RptoDetailsViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="auto,auto,auto,*,auto" Padding="10,5" RowSpacing="5">
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="{Binding Place.Address}"/>
+            <Label Text="{Binding Place.TimeWork, StringFormat='Режим работы: {0}'}" FontSize="12">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Place.TimeWork}" Value="{x:Null}">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding Place.TimeWork}" Value="">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <Label Text="{Binding Place.Phones, StringFormat='Телефоны: {0}'}" FontSize="12"/>
+            <Label Text="{Binding Place.Updated, StringFormat='Обновлено: {0}'}" FontSize="12" TextColor="{StaticResource Gray500}"/>
+        </VerticalStackLayout>
+
+        <SearchBar Grid.Row="1" Placeholder="Номер ТС" Text="{Binding Search}" SearchCommand="{Binding RefreshCommand}"/>
+
+        <Grid Grid.Row="2" ColumnDefinitions="40,*,*,*" BackgroundColor="{StaticResource Primary}" ColumnSpacing="5" Padding="5">
+            <Label Grid.Column="0" Text="№" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+            <Label Grid.Column="1" Text="Номер ТС" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+            <Label Grid.Column="2" Text="Постановка в очередь" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+            <Label Grid.Column="3" Text="Прием из очереди" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+        </Grid>
+
+        <RefreshView Grid.Row="3" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Gray">
+            <CollectionView ItemsSource="{Binding Vehicles}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                <CollectionView.Footer>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" HeightRequest="40" Margin="0,5"/>
+                </CollectionView.Footer>
+                <CollectionView.EmptyView>
+                    <Label Text="Записи не найдены" HorizontalTextAlignment="Center" Margin="0,40" FontSize="Medium"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,*,*,*" ColumnSpacing="5" Padding="5,0">
+                            <Label Grid.Column="0" Text="{Binding Number}"/>
+                            <Label Grid.Column="1" Text="{Binding TsNumber}" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="{Binding RegisteredAt}" FontSize="12"/>
+                            <Label Grid.Column="3" Text="{Binding AcceptedAt}" FontSize="12"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Label Grid.Row="4" Text="{Binding TotalItems, StringFormat='Всего {0:0}'}" BackgroundColor="Gray" HorizontalTextAlignment="End" Padding="5,10"/>
+    </Grid>
+</ContentPage>
